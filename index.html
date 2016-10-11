@@ -7,11 +7,11 @@
 		<script type="text/javascript" src="js/vue.min.js"></script>
 		<script src="js/vue-resource.min.js"></script>
 		<style>
-			#app{ width: 400px; font-size: 14px; margin: 20px;}
+			#app{ width: 800px; font-size: 14px; margin: 20px;}
 		
 			table tr td{ margin: 0; padding: 0;}
 			table{ border-left: solid 1px #CCCCCC; border-top: solid 1px #CCCCCC; border-spacing: 0;}
-			table tr td{ height: 40px; width: 100px; line-height: 40px; text-align: center; border-bottom: solid 1px #cccccc; border-right: solid 1px #CCCCCC; }
+			table tr td{ height: 40px; width: 200px; line-height: 40px; text-align: center; border-bottom: solid 1px #cccccc; border-right: solid 1px #CCCCCC; }
 			.btn{background-color: #3178B6; color: white; padding: 5px 10px; border-radius: 5px;}
 			
 			#add-book{margin-top: 20px;}
@@ -66,34 +66,36 @@
 			</div>
 		</div>
 		<script>
-			var d = [
-	            {
-	                id: 1,
-	                name: '三国演义',
-	                author: '罗贯中',
-	                price: 30.0
-	            },
-	            {
-	                id: 2,
-	                name: '西游记',
-	                author: '吴承恩',
-	                price: 30.0
-	            },
-	            {
-	                id: 3,
-	                name: '红楼梦',
-	                author: '曹雪芹',
-	                price: 30.0
-	            },
-	        ];
+//			var d = [
+//	            {
+//	                id: 1,
+//	                name: '三国演义',
+//	                author: '罗贯中',
+//	                price: 30.0
+//	            },
+//	            {
+//	                id: 2,
+//	                name: '西游记',
+//	                author: '吴承恩',
+//	                price: 30.0
+//	            },
+//	            {
+//	                id: 3,
+//	                name: '红楼梦',
+//	                author: '曹雪芹',
+//	                price: 30.0
+//	            },
+//	        ];
 			var vm = new Vue({
 				el: "#app",
-//				ready: function(){
-//					this.$http.get('book.json', function(data){
-//						console.log(data);
-//						this.$set('bookdata', data);
-//					})
-//				},
+				ready: function(){
+					this.$http.get('book.json').then((response) => {
+						// success callback
+						this.$set('bookdata', response.body.data);
+				    }, (response) => {
+				    	// error callback
+				  	});
+				},
 				data:{
 					book: {
 						id: 0,
@@ -101,8 +103,8 @@
 						author: '',
 						price: ''
 					},
-					bookdata: d
-//					bookdata: ''
+//					bookdata: d
+					bookdata: ''
 				},
 				methods:{
 					addBook: function(){
