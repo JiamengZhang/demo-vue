@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>vue</title>
+		<link rel="stylesheet" type="text/css" href="css/public.css">
+		<script type="text/javascript" src="js/vue.min.js"></script>
+		<script src="js/vue-resource.min.js"></script>
+		<style>
+			#app{ width: 800px; font-size: 14px; margin: 20px;}
+		
+			table tr td{ margin: 0; padding: 0;}
+			table{ border-left: solid 1px #CCCCCC; border-top: solid 1px #CCCCCC; border-spacing: 0;}
+			table tr td{ height: 40px; width: 200px; line-height: 40px; text-align: center; border-bottom: solid 1px #cccccc; border-right: solid 1px #CCCCCC; }
+			.btn{background-color: #3178B6; color: white; padding: 5px 10px; border-radius: 5px;}
+			
+			#add-book{margin-top: 20px;}
+			#add-book legend{ font-size: 20px; line-height: 40px; border-bottom: solid 1px #CCCCCC; width: 100%; padding-left: 10px;}
+			#add-book span{ display: block; width: 100%; line-height: 30px; padding-left: 10px;}
+			#add-book input{ display: block; width: 100%; height: 36px; line-height: 36px; padding: 6px 9px; border:solid 1px #e1e1e1; border-radius: 5px;}
+			#add-book button{ background-color: #3178B6; color: white; padding: 10px 0; border-radius: 5px; width: 100%; margin-top: 20px;}
+			
+			
+			
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<table>
+				<thead>
+					<tr>
+						<td>编号</td>
+						<td>书名</td>
+						<td>作者</td>
+						<td>价格</td>
+						<td>操作</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="book in bookdata">
+						<td>{{$index+1}}</td>
+						<td>{{book.name}}</td>
+						<td>{{book.author}}</td>
+						<td>{{book.price}}</td>
+						<td>
+							<button class="btn" @click="deleteBook(book);">删除</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div id="add-book">
+				<legend>添加书籍</legend>
+				<div>
+					<span>书名</span>
+					<input type="text" v-model="book.name" />
+				</div>
+				<div>
+					<span>作者</span>
+					<input type="text" v-model="book.author" />
+				</div>
+				<div>
+					<span>价格</span>
+					<input type="text" v-model="book.price" />
+				</div>
+				<button v-on:click="addBook()">添加</button>
+			</div>
+		</div>
+		<script>
+//			var d = [
+//	            {
+//	                id: 1,
+//	                name: '三国演义',
+//	                author: '罗贯中',
+//	                price: 30.0
+//	            },
+//	            {
+//	                id: 2,
+//	                name: '西游记',
+//	                author: '吴承恩',
+//	                price: 30.0
+//	            },
+//	            {
+//	                id: 3,
+//	                name: '红楼梦',
+//	                author: '曹雪芹',
+//	                price: 30.0
+//	            },
+//	        ];
+			var vm = new Vue({
+				el: "#app",
+				ready: function(){
+					this.$http.get('book.json').then((response) => {
+						// success callback
+						this.$set('bookdata', response.body.data);
+						console.log(JSON.stringify(response.body.data));
+				    }, (response) => {
+				    	// error callback
+				  	});
+				},
+				data:{
+					book: {
+						id: 0,
+						name: '',
+						author: '',
+						price: ''
+					},
+//					bookdata: d
+					bookdata: ''
+				},
+				methods:{
+					addBook: function(){
+						var self = this;
+						self.book.id = self.bookdata.length + 1;
+						self.bookdata.push(self.book);
+						self.book = '';
+					},
+					deleteBook: function(book){
+						this.bookdata.$remove(book);
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

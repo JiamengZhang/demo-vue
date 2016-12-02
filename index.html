@@ -1,123 +1,176 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<title>vue</title>
-		<link rel="stylesheet" type="text/css" href="css/public.css">
-		<script type="text/javascript" src="js/vue.min.js"></script>
-		<script src="js/vue-resource.min.js"></script>
-		<style>
-			#app{ width: 800px; font-size: 14px; margin: 20px;}
-		
-			table tr td{ margin: 0; padding: 0;}
-			table{ border-left: solid 1px #CCCCCC; border-top: solid 1px #CCCCCC; border-spacing: 0;}
-			table tr td{ height: 40px; width: 200px; line-height: 40px; text-align: center; border-bottom: solid 1px #cccccc; border-right: solid 1px #CCCCCC; }
-			.btn{background-color: #3178B6; color: white; padding: 5px 10px; border-radius: 5px;}
-			
-			#add-book{margin-top: 20px;}
-			#add-book legend{ font-size: 20px; line-height: 40px; border-bottom: solid 1px #CCCCCC; width: 100%; padding-left: 10px;}
-			#add-book span{ display: block; width: 100%; line-height: 30px; padding-left: 10px;}
-			#add-book input{ display: block; width: 100%; height: 36px; line-height: 36px; padding: 6px 9px; border:solid 1px #e1e1e1; border-radius: 5px;}
-			#add-book button{ background-color: #3178B6; color: white; padding: 10px 0; border-radius: 5px; width: 100%; margin-top: 20px;}
-			
-			
-			
-		</style>
-	</head>
-	<body>
-		<div id="app">
-			<table>
-				<thead>
-					<tr>
-						<td>编号</td>
-						<td>书名</td>
-						<td>作者</td>
-						<td>价格</td>
-						<td>操作</td>
-					</tr>
-				</thead>
-				<tbody>
-					<tr v-for="book in bookdata">
-						<td>{{book.id}}</td>
-						<td>{{book.name}}</td>
-						<td>{{book.author}}</td>
-						<td>{{book.price}}</td>
-						<td>
-							<button class="btn" @click="deleteBook(book);">删除</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<div id="add-book">
-				<legend>添加书籍</legend>
-				<div>
-					<span>书名</span>
-					<input type="text" v-model="book.name" />
-				</div>
-				<div>
-					<span>作者</span>
-					<input type="text" v-model="book.author" />
-				</div>
-				<div>
-					<span>价格</span>
-					<input type="text" v-model="book.price" />
-				</div>
-				<button v-on:click="addBook()">添加</button>
-			</div>
-		</div>
+    <head>
+        <title>首页</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="module/index/css/public.css">
+		<link rel="stylesheet" type="text/css" href="public/font/font-awesome.min.css"/>
+		<link rel="stylesheet" type="text/css" href="module/index/css/swiper-3.2.7.min.css"/>
+		<link rel="stylesheet" type="text/css" href="module/index/css/index.css"/>
+		<link rel="stylesheet" type="text/css" href="public/css/main.css" />
+		<script src="public/js/sea.js"></script>
 		<script>
-//			var d = [
-//	            {
-//	                id: 1,
-//	                name: '三国演义',
-//	                author: '罗贯中',
-//	                price: 30.0
-//	            },
-//	            {
-//	                id: 2,
-//	                name: '西游记',
-//	                author: '吴承恩',
-//	                price: 30.0
-//	            },
-//	            {
-//	                id: 3,
-//	                name: '红楼梦',
-//	                author: '曹雪芹',
-//	                price: 30.0
-//	            },
-//	        ];
-			var vm = new Vue({
-				el: "#app",
-				ready: function(){
-					this.$http.get('book.json').then((response) => {
-						// success callback
-						this.$set('bookdata', response.body.data);
-				    }, (response) => {
-				    	// error callback
-				  	});
-				},
-				data:{
-					book: {
-						id: 0,
-						name: '',
-						author: '',
-						price: ''
-					},
-//					bookdata: d
-					bookdata: ''
-				},
-				methods:{
-					addBook: function(){
-						var self = this;
-						self.book.id = self.bookdata.length + 1;
-						self.bookdata.push(self.book);
-						self.book = '';
-					},
-					deleteBook: function(book){
-						this.bookdata.$remove(book);
-					}
-				}
-			});
-		</script>
-	</body>
+        	seajs.use("init",function(){
+        		seajs.use("./module/index/js/index.js");
+        		define(function(require){
+	        		var index = require("./../../module/index/js/index.js");
+	        		bannerGo = index.bannerGo;
+	        	})
+        	});
+        	
+        	
+        	
+   		</script>
+    </head>
+    
+  
+    <body id="index" class="bg-grey">
+    	<!--当前位置-->
+		<!--<div class="top bg-orange tx-white">
+			<div class="left">
+				<span class="fa fa-angle-left"></span>
+			</div>
+			<div class="currentBox" @click="openWindow()" v-cloak>
+				<span>当前位置：</span>
+				<span class="city" v-if="city">{{city}}</span>
+				<span class="city" v-else>定位中...</span>
+				<span class="community" v-if="servicesCommunity">{{servicesCommunity}}</span>
+				<span class="community" v-else>请选择小区</span>
+			</div>
+		</div>-->
+		<div class="top" v-cloak>
+			<span class="currentBox" @click="openWindow()" v-cloak>
+				<span class="fa fa-map-marker"></span>
+				<span class="city" v-if="city">{{city}}</span>
+				<span class="city" v-else>定位中...</span>
+				<span class="community" v-if="servicesCommunity">{{servicesCommunity}}</span>
+				<span class="community" v-else>请选择小区</span>
+			</span>
+		</div>	
+		<!--当前位置end-->
+		
+		<!--banner-->
+		<div class="bannerBox hide" v-cloak>
+			<div class="swiper-wrapper">
+		        <!--<div href="javascript:void(0);" class="swiper-slide" >
+		        	<a href="#index">
+		        		<img src="module/index/img/banner1.png" class="img-responsive"/>
+		        	</a>
+		        </div>
+		        <div href="javascript:void(0);" class="swiper-slide">
+		        	<a href="#index">
+		        		<img src="module/index/img/banner1.png" class="img-responsive"/>
+		        	</a>
+		        </div>
+		        <div href="javascript:void(0);" class="swiper-slide">
+		        	<a href="#index">
+		        		<img src="module/index/img/banner1.png" class="img-responsive"/>
+		        	</a>
+		        </div>-->		        
+		   	</div>
+		   	<div class="swiper-pagination"></div>
+		</div>
+		<!--banner end-->
+		
+    	
+    	<!--主体显示部分-->
+    	<div class="mainContent hide">
+    		<!--热卖爆款-->
+    		<div class="hotBox">
+    			<div class="title bg-grey">
+    				<div class="titleCon">热卖爆款</div>
+    				<div class="more tx-grey" @click="showHotMore(hotMore)">
+    					<span>查看更多</span>
+    					<i class="fa fa-angle-right tx-grey-light"></i>
+    				</div>
+    			</div>
+    			<div class="hotCon bg-white" v-cloak>
+    				<div class="leftContainer" @click="shopMtlIdget(hotGoods[0].shopMtlId)">
+    					<a class="pa">
+	    					<div class="subtitle">{{hotGoods[0].materialName}}</div>
+	    					<div class="">
+	    						<div class="priceBox">
+	    							<span class="dazhePrice">￥{{hotGoods[0].dazhePrice}}</span>
+	    							<span class="price">￥{{hotGoods[0].price}}</span>
+	    						</div>
+	    						<img src="{{hotGoods[0].attachUrl?hotGoods[0].attachUrl:'public/image/tupian.png'}}" />
+	    					</div>
+    					</a>
+    				</div>
+    				<div class="rightContainer">
+    					<a class="pa" @click="shopMtlIdget(hotGoods[1].shopMtlId)">
+    						<div class="container">
+    							<div class="subtitle">{{hotGoods[1].materialName}}</div>
+    							<div class="priceBox">
+    								<span class="dazhePrice">￥{{hotGoods[1].dazhePrice}}</span>
+    								<span class="price">￥{{hotGoods[1].price}}</span>
+    							</div>
+    						</div>
+    						<div class="imgBox">
+    							<img src="{{hotGoods[1].attachUrl?hotGoods[1].attachUrl:'public/image/tupian.png'}}" />
+    						</div>
+    					</a>
+    					<a class="pa" @click="shopMtlIdget(hotGoods[2].shopMtlId)">
+    						<div class="container">
+    							<div class="subtitle">{{hotGoods[2].materialName}}</div>
+    							<div class="priceBox">
+    								<span class="dazhePrice">￥{{hotGoods[2].dazhePrice}}</span>
+    								<span class="price">￥{{hotGoods[2].price}}</span>
+    							</div>
+    						</div>
+    						<div class="imgBox">
+    							<img src="{{hotGoods[2].attachUrl?hotGoods[2].attachUrl:'public/image/tupian.png'}}" />
+    						</div>
+    					</a>
+    				</div>
+    			</div>
+    		</div>
+    		<div class="bianliBox">
+    			<div class="title bg-grey">
+    				<div class="titleCon">便利代购</div>
+    				<div class="more tx-grey" @click="showbianli(bianliMore)">
+    					<span>查看更多</span>
+    					<i class="fa fa-angle-right tx-grey-light"></i>
+    				</div>
+    			</div>
+    			<div class="bianliCon bg-white" v-cloak>
+    				<a v-for="item in bianli" @click="showbianli(item.materialId)">
+    					<div class="subtitleBox">
+    						<span class="subtitle">{{item.materialName}}</span>
+    						<span class="subtext">{{item.remark}}</span>
+    					</div>
+    					<div class="imgBox">
+    						<img src="{{item.attachUrl?item.attachUrl:'public/image/tupian.png'}}" />
+    					</div>
+    				</a>
+    			</div>
+    		</div>
+    	</div>
+    	
+    	<!--小区选择弹窗-->
+    	<div id="communityBox" class="communityBox hide">
+            <div class="content">
+                <div class="title">
+                	请选择你所在的小区
+                	<span class="closeBox">
+                		<i class="fa fa-close" @click="closeWindow()"></i>
+                	</span>
+                </div>
+                <div class="currentCity"> 
+                	<span>当前城市</span>
+                	<span id="NewCity" v-if="city">{{city}}</span>
+                	<span id="NewCity" v-else>定位中...</span>
+                </div>
+                <ul id="servicesCommunity">
+                	<li v-for="item in community" @click="selectCommunity(item.siteId,item.siteName,item.servicesCommunity)">{{item.servicesCommunity}}</li>
+                </ul>
+            </div>
+        </div>
+    	<!--小区选择弹窗end-->
+    	
+        
+        
+    </body>
+    
 </html>

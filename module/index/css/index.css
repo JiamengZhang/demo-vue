@@ -1,0 +1,84 @@
+/*public*/
+.bg-orange{ background-color: #f26922;}
+.bg-grey{ background-color: #ebebeb;}
+.bg-white{ background-color: #FFFFFF;}
+.tx-white{ color: #FFFFFF;}
+.tx-grey{ color: #818181;}
+.tx-grey-light{ color: #b2b2b2;}
+.pa{ padding: .8em;}
+.bb{ border-bottom: solid 1px #e8e8e8;}
+
+[v-cloak]{ opacity: 0;}
+.hide{ display: none!important;}
+
+
+/*当前位置*/
+/*.top{ width: 100%; height: 3em; display: flex; flex-flow: row;}
+	.top .left{ width: 3em; padding: .5em;}
+		.top .left span{ font-size: 2em; display: block; text-align: center;}
+	.top .currentBox{ flex: 1; padding: .5em;}
+		.top .currentBox span{ display: inline-block; line-height: 2em;}*/
+
+/*.top .currentBox{ border-radius: 100px; background-color: #999999; opacity: .8; display: inline-block; padding: 0 10px; font-size: 1em; line-height: 2em; color: white; z-index: 10; position: absolute; top: 10px; left: 50%; margin-left: -20px;}*/
+.top{ width: 100%; position: absolute; top: 10px; left: 0; text-align: center; z-index: 10;}
+.top .currentBox{ border-radius: 100px; background-color: #999999; opacity: .8; display: inline-block; padding: 0 10px; font-size: 1em; line-height: 2em; color: white;}
+
+/*banner*/
+.bannerBox{ width: 100%; height: 100%; overflow: hidden; position: relative; z-index: 9;}
+	.bannerBox img{ width: 100%; height: auto; display: block;}
+	.swiper-pagination-bullet-active{ background: #F26922;}
+	
+	
+/*产品部分*/
+.mainContent .title{ width: 100%; display: flex; flex-flow: row; padding: .5em 1em;}	
+	.mainContent .title .titleCon{ border-left: solid 5px #F26922; line-height: 1.2em; font-size: 1em; padding: 0 10px; flex: 1;}
+	.mainContent .title .more{ font-size: 1em; display: flex; flex-flow: row; line-height: 1.2em}
+		.mainContent .title .more > i { font-size: 1.2em; vertical-align: middle; margin-left: .2em;}
+
+	.mainContent .hotCon{ display: flex; width: 100%; flex-flow: row;}
+		.mainContent .hotCon .leftContainer,
+		.mainContent .hotCon .rightContainer{ flex: 1;}
+		.mainContent .hotCon .leftContainer{ border-right: solid 1px #e8e8e8;}
+			.mainContent .hotCon .leftContainer .pa{ display: block;}
+			.mainContent .hotCon .subtitle{ width: 100%; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; text-overflow: ellipsis; -webkit-line-clamp: 2; font-size: 1em; line-height: 1.4em; color: #4f4f4f;}
+			.mainContent .hotCon .priceBox{ padding: .5em 0;}
+			.mainContent .hotCon .price,
+			.mainContent .hotCon .dazhePrice{ display: inline-block; color: #ff0101; font-size: 1em; line-height: 1.2em;}
+			.mainContent .hotCon .price{ text-decoration: line-through; color: #b2b2b2}
+			.mainContent .hotCon .dazhePrice{ font-weight: bold;}
+			.mainContent .hotCon img{ display: block; width: 100%; height: auto;}
+
+		.mainContent .hotCon .rightContainer{ display: flex; flex-flow: column}
+		.mainContent .hotCon .rightContainer > .pa { display: flex; flex-flow: row; width: 100%; flex: 1;}
+		.mainContent .hotCon .rightContainer > .pa:first-child{ border-bottom: solid 1px #e8e8e8;}
+			.mainContent .hotCon .rightContainer .container{ flex: 1.5; margin: auto 0; margin-right: .5em;}
+			.mainContent .hotCon .rightContainer .imgBox{ flex: 1; margin: auto 0;}
+
+	.mainContent .bianliCon{ width: 100%; overflow: hidden;}
+		.mainContent .bianliCon a{ width: 50%; float: left; display: flex; flex-flow: row; padding: .8em; border: solid 1px #E8E8E8; border-left-width: 0; border-top-width: 0;}
+			.mainContent .bianliCon .subtitleBox{ flex: 1.8; margin: auto 0; margin-right: .5em;}
+				.mainContent .bianliCon .subtitleBox span{ display: block; line-height: 1.5em;}
+				.mainContent .bianliCon .subtitleBox .subtitle{ font-size: 1em; color: #4f4f4f;}
+				.mainContent .bianliCon .subtitleBox .subtext{ font-size: .8em; color: #ababab;width: 100%; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; text-overflow: ellipsis; -webkit-line-clamp: 1;}
+			.mainContent .bianliCon .imgBox{ flex: 1; margin: auto 0;}
+				.mainContent .bianliCon .imgBox img{ display: block; width: 100%; height: auto;}
+
+
+/*小区选择弹窗*/
+.communityBox{ width: 100%; height: 100%; background: rgba(0, 0, 0, .5); position: fixed; bottom: 0; left: 0; z-index: 99;}
+.hide{ display: none;}
+	.communityBox .content{ position: absolute; top: 3%; left: 10%; width: 80%; border: 1px solid #F78C3E; background-color: white; z-index: 100; overflow: auto; border-radius: 10px;}
+		.communityBox .content .title{ height: 2.5em; line-height:2.5em; text-align: center;background-color:#EFEFEF; position: relative;}
+			.communityBox .content .title .closeBox{ position: absolute; right: 0; top: 0; font-size: 1.2em; width: 2em;}
+		.communityBox .content .currentCity{ text-align: center; height: 2.5em; line-height: 2.5em; border-bottom: 1px solid #E9E9E9;}
+		.communityBox .content #servicesCommunity{ max-height: 20em; overflow-y: scroll;}
+			.communityBox .content #servicesCommunity li{ text-align: center; line-height: 2em; font-size: 1em; display: block;}
+
+
+
+
+
+
+
+
+
